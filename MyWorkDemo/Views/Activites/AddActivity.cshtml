@@ -1,0 +1,60 @@
+﻿@using MyWorkDemo.Enum
+@model MyWorkDemo.Models.ActivityDto
+
+@{
+    ViewData["Title"] = "AddActivity";
+}
+
+<h1>AddActivity</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddActivity">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Titolo" class="control-label"></label>
+                <input asp-for="Titolo" class="form-control" />
+                <span asp-validation-for="Titolo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descrizione" class="control-label"></label>
+                <input asp-for="Descrizione" class="form-control" />
+                <span asp-validation-for="Descrizione" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="State" class="control-label"></label>
+                <select asp-for="State" class="form-control" asp-items="Html.GetEnumSelectList<StateEnum>()">
+                    <option>Please choose the State</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Ore" class="control-label"></label>
+                <input asp-for="Ore" class="form-control" />
+                <span asp-validation-for="Ore" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.UsersIds, new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-6">
+                    @Html.ListBoxFor(model => model.UsersIds, new MultiSelectList(Model.drpUser, "Value", "Text"), new { @class = "form-control", multiple = "multiple", id = "Users_dropdown" })
+                </div>
+            </div>
+            
+            <div class="font-weight-bold" style="color:darkred">@ViewData["message"]</div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Activites" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

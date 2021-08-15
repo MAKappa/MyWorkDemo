@@ -1,0 +1,62 @@
+﻿@model IEnumerable<MyWorkDemo.Data.Activity>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List</h1>
+
+<p>
+    <a asp-controller="Activites" asp-action="AddActivity">Create New</a>
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Titolo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descrizione)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivityDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.State)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titolo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descrizione)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ore)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActivityDate)
+                </td>
+                <td style="@(item.State.ToString() == "InProgress" ? "color:#965e09" : (item.State.ToString() == "Completed" ? "color:green" : "color:grey" )   )">
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+                <td>
+                    <a asp-controller="Activites" asp-action="AddActivity" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="Activites" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="Notes" asp-action="AddNote" asp-route-id="@item.Id">Add Note</a> |
+                    <a asp-controller="Activites" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

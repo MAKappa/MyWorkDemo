@@ -1,0 +1,91 @@
+﻿@model MyWorkDemo.Models.ActivityDto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<h2>Details</h2>
+
+
+<div>
+    <h4>Detail Activity</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Titolo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titolo)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descrizione)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descrizione)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ore)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActivityDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActivityDate)
+        </dd>
+
+        <div>
+            <label class="font-weight-bold">Assigned to: </label>
+            <ul>
+
+                @foreach (var item in Model.drpUser)
+                {
+                    <li>
+                        @Html.DisplayFor(model => item.Text)
+                    </li>
+                }
+
+            </ul>
+        </div>
+
+        <div>
+            <label class="font-weight-bold">Notes: </label>
+            
+            <ul>
+               
+                @foreach (var item in Model.Notes)
+                {
+                    <li>
+                        @Html.DisplayFor(model => item.Descrizione)
+                    </li>
+                }
+
+            </ul>
+        </div>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
